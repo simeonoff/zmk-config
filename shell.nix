@@ -27,14 +27,14 @@ pkgs.mkShell {
   ];
 
   shellHook = ''
-    # Create a local pip install directory
-    export PIP_PREFIX="$PWD/.venv"
-    export PYTHONPATH="$PIP_PREFIX/${pkgs.python3.sitePackages}:$PYTHONPATH"
-    export PATH="$PIP_PREFIX/bin:$PATH"
+    if [ ! -f .venv/bin/activate ] || ! .venv/bin/python --version &>/dev/null; then
+      echo "Creating/rebuilding Python venv..."
+      rm -rf .venv
+      python3 -m venv .venv
+      .venv/bin/pip install -r zephyr/scripts/requirements-base.txt
+    fi
 
-    # Ensure the directory exists
-    mkdir -p "$PIP_PREFIX"
-
+    source .venv/bin/activate
     echo "Nix environment loaded for ZMK development"
     echo "Python: $(python3 --version)"
   '';

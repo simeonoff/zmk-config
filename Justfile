@@ -2,7 +2,7 @@ default:
     @just --list --unsorted
 
 config := absolute_path('config')
-module := absolute_path('config/zmk-user-module')
+module := absolute_path('config/zmk-local-module')
 build := absolute_path('.build')
 out := absolute_path('firmware')
 
