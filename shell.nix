@@ -31,7 +31,7 @@ pkgs.mkShell {
       echo "Creating/rebuilding Python venv..."
       rm -rf .venv
       python3 -m venv .venv
-      .venv/bin/pip install -r zephyr/scripts/requirements-base.txt
+      .venv/bin/pip install -r zephyr/scripts/requirements-base.txt protobuf grpcio-tools
     fi
 
     source .venv/bin/activate
